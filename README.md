@@ -52,5 +52,8 @@ python 02_analysis.py           # full analysis
 | `01_clean_explore.py` | Load, merge, profile — Data Detective |
 | `02_analysis.py` | Prevalence trends, rankings, burden analysis |
 | `03_sql_queries.sql` | All key queries in SQL |
-| `powerbi_spec.md` | Power BI dashboard build guide with DAX measures |
+| `dashboard.md` | Built in Power BI Desktop. Download the .pbix file to interact with the full report|<img width="3427" height="1326" alt="Provincial Analysis" src="https://github.com/user-attachments/assets/3a370e0d-5462-4f0d-b3b6-049e6132380e" />
+<img width="3428" height="1389" alt="National Overview" src="https://github.com/user-attachments/assets/4f997be0-8a12-45e1-ad8d-eb92e6dbfd93" />
+<img width="3428" height="1386" alt="Age Group Burden" src="https://github.com/user-attachments/assets/6b0a5aed-fbae-40f5-b209-fd8722c18b2a" />
+<img width="3439" height="1386" alt="Trend and Analysis" src="https://github.com/user-attachments/assets/9efd0c9b-6e9c-4b64-97ef-b3d9df7e194d" />
 | `prevention_brief.md` | Plain-language brief for a public health director |
