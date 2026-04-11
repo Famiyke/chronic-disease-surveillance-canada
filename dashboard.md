@@ -1,127 +1,48 @@
-# Project 2 — Power BI Dashboard Spec
-## "Canada Chronic Disease Burden Monitor"
+# Canada Chronic Disease Burden Monitor — Power BI Dashboard
 
-### Data Connection
-- Source: `ccdss_clean.csv`
-- Load via: Get Data → Text/CSV
-- Set `year` as whole number, `prevalence` and `incidence` as decimals
-- Mark `province` as geographic data type: Province/State → Canada
+**File:** `chronic_disease_burden_monitor.pbix`
+**Tool:** Power BI Desktop (free download at microsoft.com/powerbi)
+**Data:** `ccdss_clean.csv` — 2,600 records, 5 conditions, 10 provinces, 4 age groups, 2010–2022
+
+## How to Open
+1. Download `chronic_disease_burden_monitor.pbix` from this repo
+2. Open Power BI Desktop
+3. File → Open → select the .pbix file
+4. The dashboard loads with all 4 pages ready to explore
 
 ---
+
+## Dashboard Pages
 
 ### Page 1 — National Overview
-
-**Visual 1 — Card row (3 cards)**
-- Total Conditions Tracked: `DISTINCTCOUNT(ccdss[condition])`
-- Latest Year: `MAX(ccdss[year])`
-- Avg National Prevalence: `AVERAGE(ccdss[prevalence])` → format `0.0"%"`
-
-**Visual 2 — Line chart: Prevalence trend over time**
-- X-axis: `year`
-- Y-axis: `AVERAGE(prevalence)`
-- Legend: `condition`
-- Title: "30-Year Chronic Disease Prevalence Trends"
-- Add a constant line at national average
-
-**Visual 3 — Bar chart: Condition ranking**
-- Y-axis: `condition`
-- X-axis: `AVERAGE(prevalence)` filtered to latest year
-- Sort: descending
-- Color: single accent — highlight top condition
-
-**Page-level filter:** Year slicer (set default to latest year)
-
----
+Three KPI cards showing conditions tracked, latest data year, and average national prevalence. A line chart shows 30-year prevalence trends for all five conditions simultaneously, making the Mood/Anxiety growth curve immediately visible against the others. A bar chart ranks conditions by latest-year prevalence. Year slicer filters all visuals.
 
 ### Page 2 — Provincial Analysis
-
-**Visual 1 — Filled Map**
-- Location: `province`
-- Color saturation: `AVERAGE(prevalence)` in latest year
-- Color scale: light yellow → deep red
-- Tooltip: Province, Avg Prevalence, Condition breakdown
-
-**Visual 2 — Clustered bar: Province × Condition**
-- Y-axis: `province`
-- X-axis: `AVERAGE(prevalence)`
-- Legend: `condition`
-- Sort: by total prevalence descending
-
-**DAX Measure — Atlantic Flag:**
-```dax
-Atlantic Flag =
-IF(
-    SELECTEDVALUE(ccdss[province]) IN {"NB","NS","PE","NL"},
-    "Atlantic Province",
-    "Other Province"
-)
-```
-
-**Visual 3 — Table: Province scorecard**
-Columns: Province, Diabetes%, Hypertension%, COPD%, Mood/Anxiety%, Heart Failure%
-Use conditional formatting: green → red scale per column
-
----
+A filled map of Canada colour-coded by average chronic disease prevalence — Atlantic provinces appear darker. A clustered bar chart breaks down each province by condition. A province scorecard table uses conditional formatting (green to red) to show at a glance which provinces are above or below national benchmarks on each condition.
 
 ### Page 3 — Age Group Burden
+A clustered column chart shows how each condition distributes across the four age groups. The Heart Failure and COPD columns show near-zero values for 20–44 and then a dramatic spike at 75+. A condition × age heat map uses data bars to encode the same pattern in matrix form.
 
-**Visual 1 — Clustered column: Condition by age group**
-- X-axis: `age_group`
-- Y-axis: `AVERAGE(prevalence)`
-- Legend: `condition`
-- Filter to latest year
-
-**Visual 2 — Matrix: Condition × Age heatmap**
-- Rows: `condition`
-- Columns: `age_group`
-- Values: `AVERAGE(prevalence)`
-- Conditional formatting: data bars
-
-**DAX Measure — Seniors Burden Ratio:**
-```dax
-Seniors Ratio =
-DIVIDE(
-    CALCULATE(AVERAGE(ccdss[prevalence]),
-              ccdss[age_group] = "75+"),
-    CALCULATE(AVERAGE(ccdss[prevalence]),
-              ccdss[age_group] = "20-44")
-)
-```
+### Page 4 — Trends and Growth
+Small multiples line chart shows each condition's trend line independently, making individual growth patterns clearer than the overlapping lines on Page 1. A bar chart ranks conditions by percentage growth since 2010 — Mood/Anxiety and Diabetes are the standout bars.
 
 ---
 
-### Page 4 — Trends & Growth
+## Key Visual Findings
 
-**Visual 1 — Line chart: Each condition trend**
-- X-axis: `year`
-- Y-axis: `AVERAGE(prevalence)`
-- Small multiples by: `condition`
-
-**Visual 2 — Bar chart: % Growth since earliest year**
-Use DAX measure:
-```dax
-Growth Since Baseline =
-VAR earliest_yr = MIN(ccdss[year])
-VAR latest_yr   = MAX(ccdss[year])
-RETURN
-DIVIDE(
-    CALCULATE(AVERAGE(ccdss[prevalence]),
-              FILTER(ccdss, ccdss[year] = latest_yr))
-  - CALCULATE(AVERAGE(ccdss[prevalence]),
-              FILTER(ccdss, ccdss[year] = earliest_yr)),
-    CALCULATE(AVERAGE(ccdss[prevalence]),
-              FILTER(ccdss, ccdss[year] = earliest_yr))
-) * 100
-```
+- The Mood/Anxiety trend line on Page 1 is steeper than any other condition since 2015
+- Atlantic provinces are visibly darker on the Page 2 map — the geographic pattern is immediately clear
+- The Heart Failure 75+ column on Page 3 towers over all other age groups — a 96x ratio
+- The Page 4 growth bar chart shows Mood/Anxiety (51%) and Diabetes (39%) clearly separated from the other three conditions
 
 ---
 
-### Theme & Colours
-| Element | Hex |
-|---------|-----|
-| Primary | `#1A5276` |
-| Accent | `#E74C3C` |
-| Positive trend | `#27AE60` |
-| Warning | `#F39C12` |
-| Background | `#FAFAFA` |
-| Grid lines | `#E8E8E8` |
+## Screenshots
+
+![Provincial Analysis](https://github.com/user-attachments/assets/3a370e0d-5462-4f0d-b3b6-049e6132380e)
+
+![National Overview](https://github.com/user-attachments/assets/4f997be0-8a12-45e1-ad8d-eb92e6dbfd93)
+
+![Age Group Burden](https://github.com/user-attachments/assets/9efd0c9b-6e9c-4b64-97ef-b3d9df7e194d)
+
+![Trend and Analysis](https://github.com/user-attachments/assets/6b0a5aed-fbae-40f5-b209-fd8722c18b2a)
