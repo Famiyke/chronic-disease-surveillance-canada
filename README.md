@@ -100,3 +100,15 @@ See `dashboard.md` for screenshots and key visual findings.
 
 ## Data Note
 The CCDSS publishes aggregate surveillance tables via an interactive web tool. Individual patient records are not publicly available. This project uses simulated data anchored to published CCDSS provincial prevalence figures. The analytical methodology reflects the approach used in real public health surveillance roles.
+
+---
+
+## Screenshots
+
+![Provincial Analysis](https://github.com/user-attachments/assets/3a370e0d-5462-4f0d-b3b6-049e6132380e)
+
+![National Overview](https://github.com/user-attachments/assets/4f997be0-8a12-45e1-ad8d-eb92e6dbfd93)
+
+![Age Group Burden](https://github.com/user-attachments/assets/9efd0c9b-6e9c-4b64-97ef-b3d9df7e194d)
+
+![Trend and Analysis](https://github.com/user-attachments/assets/6b0a5aed-fbae-40f5-b209-fd8722c18b2a)
