@@ -1,0 +1,47 @@
+name: Build official Nova Scotia CCDSS-derived diabetes report
+on:
+  push:
+    paths:
+      - 'official_ns_diabetes.py'
+      - '.github/workflows/build-official-diabetes.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-official:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Retrieve actual published CCDSS-derived data and calculate prevalence
+        run: python official_ns_diabetes.py
+      - name: Independently validate output schema and source attribution
+        run: |
+          python - <<'PY'
+          import csv
+          for name,expected in [
+              ('official_ns_diabetes_2000_2022.csv',23),
+              ('official_ns_diabetes_zone_2000_2022.csv',92)]:
+              with open(name, newline='', encoding='utf8') as f:
+                  rows=list(csv.DictReader(f))
+              assert len(rows)==expected, (name,len(rows))
+              assert all(r['source_url'].startswith('https://data.novascotia.ca/') for r in rows)
+              assert all(0<float(r['crude_diabetes_prevalence_percent'])<100 for r in rows)
+              print('PASS',name,len(rows))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: official-ns-diabetes-2000-2022
+          path: |
+            official_ns_diabetes_2000_2022.csv
+            official_ns_diabetes_zone_2000_2022.csv
+            OFFICIAL_NS_DIABETES_FINDINGS.md
+      - name: Publish derived aggregate CSV and documented findings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+Famiyke@users.noreply.github.com"
+          git add official_ns_diabetes_2000_2022.csv official_ns_diabetes_zone_2000_2022.csv OFFICIAL_NS_DIABETES_FINDINGS.md
+          git diff --cached --quiet || (git commit -m "Publish verified real Nova Scotia CCDSS diabetes aggregate findings" && git push)
