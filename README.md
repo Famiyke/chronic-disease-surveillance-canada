@@ -1,5 +1,6 @@
 # Project 2: Canadian Chronic Disease Surveillance Analysis
 
+> **PROJECT VALIDATION STATUS:** The Python demonstration workflow has passed GitHub Actions. Generated model parameters and subgroup comparisons are synthetic. No synthetic values should be described as verified official health-system statistics. See [SOURCE_VALIDATION.md](SOURCE_VALIDATION.md) for the evidence boundary.\n\n
 > **DATA PROVENANCE:** This portfolio project uses simulated records informed by named Canadian public sources. All generated statistics, rankings, demographic differences, and savings models are illustrative rather than verified official estimates. Recommendations are hypothetical scenarios, not observed effects.
 
 **Domain:** Epidemiology / Public Health
@@ -22,7 +23,7 @@ Which chronic conditions are growing fastest in Canada, which provinces carry th
 4. Click **Download data table** for each condition
 5. Save files as `ccdss_diabetes.csv`, `ccdss_hypertension.csv`, etc.
 6. Place all files in this project folder
-7. `01_clean_explore.py` will detect and combine them automatically
+7. Build a separate schema-mapping/import script for authentic PHAC files. `01_clean_explore.py` reads the synthetic `ccdss_combined.csv` output and does not automatically combine official exports.
 
 ## How to Run (demo mode — no download needed)
 ```bash
@@ -38,11 +39,11 @@ python 02_analysis.py           # full analysis and recommendations
 
 | Hat | What I Did |
 |-----|-----------|
-| Data Detective | Merged 5 condition files, standardised age groups, handled suppressed small-cell counts marked with "F" or "--", validated year-over-year consistency across all provinces |
+| Data Detective | Cleaned simulated condition data, checked generated age groups and reviewed missing-value handling |
 | SQL/Python Programmer | Queried prevalence trends, ranked provinces by composite burden, identified fastest-growing conditions, calculated seniors-to-young burden ratios |
 | Dashboard Architect | Built Power BI dashboard with 4 pages: national overview, provincial analysis, age group burden, trend and growth analysis |
 | Data Storyteller | Produced a plain-language prevention brief for a public health director |
-| Strategic Consultant | Recommended prevention investment priorities by province and condition with cost estimates |
+| Scenario interpretation | Discussed illustrative planning questions without treating model estimates as actual provincial priorities |
 
 ---
 
@@ -50,21 +51,11 @@ python 02_analysis.py           # full analysis and recommendations
 
 This project's Python/SQL outputs illustrate data processing, comparisons, modeling and reporting using generated records. The specific rates, rankings, cost figures and trends in the demonstration are **not verified official findings**. See the analysis scripts for the computations and the data limitations section below for interpretation requirements.
 
-## Live Dashboard
+## Power BI demonstration status
 
-Power BI dashboard built in Power BI Desktop.
+The `canada_chronic_disease_burden_monitor.pbix` file is an **archived synthetic-data demonstration**. The present four report pages do not yet display prominent simulated-data labels. Do not use the numbers to evaluate actual Canadian disease rates. The corrected code and validation notes remain available.
 
-**Download:** `canada_chronic_disease_burden_monitor.pbix` from this repo and open in Power BI Desktop to interact with the full report.
-
-**Dashboard pages:**
-- Page 1 — National Overview: condition trend lines, prevalence ranking, year slicer
-- Page 2 — Provincial Analysis: filled map, province × condition clustered bar, scorecard table
-- Page 3 — Age Group Burden: condition by age column chart, condition × age heat map
-- Page 4 — Trends and Growth: small multiples trend lines, % growth since 2010 bar chart
-
-See `dashboard.md` for screenshots and key visual findings.
-
----
+See [DASHBOARD_CORRECTION_GUIDE.md](DASHBOARD_CORRECTION_GUIDE.md) for the required Power BI Desktop changes before publication. Historical dashboard screenshots are preserved for issue tracking but are not promoted as validated reporting.
 
 ## Interpretation and real-world next steps
 
@@ -92,15 +83,9 @@ The CCDSS publishes aggregate surveillance tables via an interactive web tool. I
 
 ---
 
-## Screenshots
+## Historical screenshots
 
-![Provincial Analysis](https://github.com/user-attachments/assets/3a370e0d-5462-4f0d-b3b6-049e6132380e)
-
-![National Overview](https://github.com/user-attachments/assets/4f997be0-8a12-45e1-ad8d-eb92e6dbfd93)
-
-![Age Group Burden](https://github.com/user-attachments/assets/9efd0c9b-6e9c-4b64-97ef-b3d9df7e194d)
-
-![Trend and Analysis](https://github.com/user-attachments/assets/6b0a5aed-fbae-40f5-b209-fd8722c18b2a)
+Older screenshot links have been removed from the public README until the PBIX carries explicit simulated-data labels and its calculations have been reviewed.
 
 ---
 
@@ -108,5 +93,5 @@ The CCDSS publishes aggregate surveillance tables via an interactive web tool. I
 
 **Environment:** Python 3 with `pandas` and `numpy` installed. If working with the Excel files, install `openpyxl` as needed. Run the simulation script before the analysis commands shown above.
 
-**Important:** The scripts are designed for the generated datasets and expected column names. Downloading a public government table does **not** guarantee that it will run with these scripts unchanged; a schema-mapping and validation step is required for authentic external data. The repository has undergone a static documentation and code-reference audit, but a fresh environment execution and independent reconciliation with official datasets have not yet been completed.
+**Important:** The scripts are designed for the generated datasets and expected column names. Downloading a public government table does **not** guarantee that it will run with these scripts unchanged; a schema-mapping and validation step is required for authentic external data. The generated-data Python workflow passed a clean GitHub Actions execution test. Independent reconciliation against authoritative population or healthcare source files remains incomplete.
 
