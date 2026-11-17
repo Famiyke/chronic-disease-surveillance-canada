@@ -23,7 +23,11 @@ jobs:
           sample=data.decode('utf-8-sig',errors='replace')
           rdr=csv.DictReader(io.StringIO(sample))
           print('HEADERS',rdr.fieldnames)
-          for i,row in enumerate(rdr):
-              if i>=8:break
+          records=list(rdr)
+          for i,row in enumerate(records[:8]):
               print('ROW',i,{k:v for k,v in row.items()})
+          print('COUNT',len(records))
+          for key in ('Year','Zone','Sex','Agegroup'):
+              unique=sorted(set(row[key] for row in records))
+              print('UNIQUE',key,len(unique),unique[:90])
           PY
