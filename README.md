@@ -1,8 +1,10 @@
 # Project 2: Canadian Chronic Disease Surveillance Analysis
 
+> **DATA PROVENANCE:** This portfolio project uses simulated records informed by named Canadian public sources. All generated statistics, rankings, demographic differences, and savings models are illustrative rather than verified official estimates. Recommendations are hypothetical scenarios, not observed effects.
+
 **Domain:** Epidemiology / Public Health
 **Tools:** Python · SQL · Power BI
-**Real Data Source:** CCDSS Data Tool — Public Health Agency of Canada
+**Public reference source (distinct from simulated analysis data):** CCDSS Data Tool — Public Health Agency of Canada
 **Download:** https://health-infobase.canada.ca/ccdss/data-tool/
 (Free — select conditions and export tables)
 
@@ -44,11 +46,11 @@ python 02_analysis.py           # full analysis and recommendations
 
 ---
 
-## Key Findings
+## Illustrative Findings From Generated Data
 
 1. **Mood and anxiety disorders are growing the fastest.** Prevalence rose from 7.5% in 2010 to 11.3% in 2022 — a 51% increase, faster than any other tracked condition. Mental health conditions now affect more Canadians than COPD and Heart Failure combined.
 
-2. **Diabetes is the second-fastest growing condition.** Up 39% since 2010 (9.8% to 13.7% nationally). Atlantic provinces carry disproportionately high diabetes rates, with NL at 12.3% and NB at 11.8% — both above the national average of 13.7% in the latest year.
+2. **Diabetes is the second-fastest growing condition.** Up 39% since 2010 (9.8% to 13.7% nationally). Atlantic provinces carry disproportionately high diabetes rates, with NL at 12.3% and NB at 11.8% — both below the stated national average of 13.7%; comparability requires verification.
 
 3. **Atlantic Canada carries the highest chronic disease burden.** NL, NB, and NS are the three highest-burden provinces across all five conditions. The Atlantic average prevalence (16.5%) sits 1.5 percentage points above the national average (15.0%). The gap is consistent across every condition tracked.
 
@@ -72,7 +74,7 @@ See `dashboard.md` for screenshots and key visual findings.
 
 ---
 
-## Strategic Recommendations
+## Hypothetical Recommendations
 
 1. **Mental health and chronic disease integration.** Mood and anxiety disorders are growing faster than any physical condition tracked. Mental health conditions also increase the severity of comorbid chronic diseases. Fund integrated chronic disease and mental health clinics in high-burden provinces.
 
@@ -98,7 +100,10 @@ See `dashboard.md` for screenshots and key visual findings.
 
 ---
 
-## Data Note
+## Data Provenance and Limitations
+
+Check all numerator, denominator, year and age adjustment definitions before comparison. The stated 12.3% (NL) and 11.8% (NB) are below, not above, the stated 13.7% national diabetes rate. The mood/anxiety growth figures differ between the repository and homepage. Neither rate is independently verified. All rankings, model-generated prevalence changes and cost-savings claims are illustrative.
+
 The CCDSS publishes aggregate surveillance tables via an interactive web tool. Individual patient records are not publicly available. This project uses simulated data anchored to published CCDSS provincial prevalence figures. The analytical methodology reflects the approach used in real public health surveillance roles.
 
 ---
