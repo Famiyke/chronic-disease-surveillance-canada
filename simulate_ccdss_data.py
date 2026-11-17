@@ -1,8 +1,8 @@
-"""
-Project 2 – simulate_ccdss_data.py
-Builds a representative chronic disease dataset
-from published CCDSS prevalence figures (2010–2022).
-Real data: https://health-infobase.canada.ca/ccdss/data-tool/
+"""Generate synthetic chronic-disease surveillance data for a demo.
+
+The modeled condition rates, age multipliers and trends are hypothetical.
+They are not published CCDSS estimates and were not derived from official
+source-table downloads. Reference: https://health-infobase.canada.ca/ccdss/
 """
 
 import pandas as pd
@@ -12,8 +12,7 @@ np.random.seed(2)
 
 PROVINCES = ["BC","AB","SK","MB","ON","QC","NB","NS","PE","NL"]
 
-# Published CCDSS prevalence rates (%) by condition — latest year available
-# Source: PHAC CCDSS data tool, 2022 estimates
+# Illustrative baseline rates (%) — NOT official PHAC CCDSS estimates
 BASE_PREVALENCE = {
     "Diabetes":          {"BC":9.1,"AB":9.8,"SK":10.6,"MB":11.2,"ON":9.6,
                           "QC":8.4,"NB":11.8,"NS":11.4,"PE":11.1,"NL":12.3},
@@ -27,7 +26,7 @@ BASE_PREVALENCE = {
                           "QC":1.9,"NB":2.8,"NS":2.9,"PE":2.6,"NL":3.1},
 }
 
-# Annual growth rates by condition (%) — from CCDSS trend reports
+# Assumed growth rates for demonstration, not verified CCDSS trends
 ANNUAL_GROWTH = {
     "Diabetes":      0.028,
     "Hypertension":  0.018,
