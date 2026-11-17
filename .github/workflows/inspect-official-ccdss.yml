@@ -1,0 +1,29 @@
+name: Inspect official Nova Scotia CCDSS dataset
+on:
+  push:
+    paths: ['.github/workflows/inspect-official-ccdss.yml']
+  workflow_dispatch:
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch official Nova Scotia diabetes prevalence data
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv,urllib.request,io
+          url='https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD'
+          req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})
+          with urllib.request.urlopen(req,timeout=45) as resp:
+              data=resp.read()
+              print('STATUS',resp.status,'BYTES',len(data),'CONTENT-TYPE',resp.headers.get('content-type'))
+          assert len(data)>500
+          sample=data.decode('utf-8-sig',errors='replace')
+          rdr=csv.DictReader(io.StringIO(sample))
+          print('HEADERS',rdr.fieldnames)
+          for i,row in enumerate(rdr):
+              if i>=8:break
+              print('ROW',i,{k:v for k,v in row.items()})
+          PY
