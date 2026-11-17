@@ -5,6 +5,10 @@ Chronic disease burden analysis: prevalence rankings,
 fastest-growing conditions, age burden, provincial gaps.
 """
 
+# PORTFOLIO DATA NOTICE: All computed findings below use simulated/generated
+# analytical records, not verified official Canadian statistics. Numeric outputs
+# illustrate methods only; any program recommendations require source validation.
+
 import pandas as pd
 import numpy as np
 
@@ -122,35 +126,17 @@ for cond in sorted(df["condition"].unique()):
     print(f"  {cond:<22} Atlantic {atl_c:.1f}%  National {can_c:.1f}%  gap {atl_c-can_c:+.1f}pp")
 
 # ── Strategic Recommendations ─────────────────────────────────────────────────
-print(f"\n{'─'*62}")
-print("STRATEGIC RECOMMENDATIONS")
-print(f"{'─'*62}")
+print("\\nILLUSTRATIVE INTERPRETATION AND NEXT STEPS")
+print("-" * 62)
 print("""
-  1. FASTEST GROWTH — Mood/Anxiety Disorders
-     Growing faster than any other tracked condition.
-     Mental health and chronic disease often co-occur,
-     which drives higher health system utilisation.
-     Fund integrated chronic-disease/mental-health clinics
-     in high-burden provinces.
+These results come from a generated portfolio dataset. They are not
+verified Canadian population or health-system estimates.
 
-  2. ATLANTIC BURDEN
-     All four Atlantic provinces exceed the national
-     average across all five conditions. Priority
-     investment in community health workers and
-     primary care expansion is needed in NB, NS,
-     PE, and NL before population health worsens further.
-
-  3. DIABETES TRAJECTORY
-     Diabetes prevalence continues to rise province-wide.
-     A 1pp reduction in diabetes prevalence through
-     structured lifestyle programs saves an estimated
-     $2.1B in downstream hospital and drug costs annually.
-
-  4. SENIORS — Heart Failure and COPD
-     Both conditions spike dramatically in the 75+
-     age group. As Canada's population ages, these two
-     conditions will become the dominant acute care
-     cost drivers. Begin building community respiratory
-     and cardiac support infrastructure now.
+Potential next steps for a real-world study:
+1. Obtain and validate authoritative source data and definitions.
+2. Recalculate differences, including denominators and uncertainty.
+3. Work with clinical, community or operational partners to assess
+   feasibility and avoid treating associations as causal effects.
+4. Treat cost differences and savings as sensitivity-tested scenarios,
+   not realized outcomes or established policy recommendations.
 """)
-print(sep)
