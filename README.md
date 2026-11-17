@@ -1,5 +1,12 @@
 # Project 2: Canadian Chronic Disease Surveillance Analysis
 
+## Reviewed interactive dashboard (no Power BI login required)
+
+[**Open the Real-data Nova Scotia diabetes visualization**](https://famiyke.github.io/health-data-portfolio/dashboards/diabetes.html)
+
+This version uses official Nova Scotia CCDSS-derived counts and populations for crude prevalence; it is not a national PHAC data analysis. The web dashboard is distinct from the older PBIX or Tableau visualization. Those legacy files were **not edited or republished** and should not be used as validated outputs.
+
+
 ## Primary official-source study: Nova Scotia diabetes surveillance (2000–2022)
 
 A reproducible **real-data** analysis now sits alongside this repository's older, separate synthetic national demonstration.
