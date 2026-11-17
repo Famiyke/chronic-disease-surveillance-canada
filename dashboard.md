@@ -1,3 +1,5 @@
+> **REPORT PRESENTATION ISSUE:** This PBIX contains simulated-data visuals, but automated inspection did not find a clear simulation disclaimer embedded on any report page. Before presenting the report publicly, open the PBIX in Power BI Desktop and add a visible banner on every page: **"SIMULATED DATA — DEMONSTRATION ONLY. NOT OFFICIAL CANADIAN HEALTH STATISTICS."** Validate all page filters, measures and data sources before claiming real findings.
+
 # Canada Chronic Disease Burden Monitor — Power BI Dashboard
 
 **File:** `chronic_disease_burden_monitor.pbix`
