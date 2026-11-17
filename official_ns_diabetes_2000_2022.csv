@@ -1,0 +1,24 @@
+year,geography,age_scope,diabetes_prevalent_count,population,crude_diabetes_prevalence_percent,source_dataset,source_url
+2000,Nova Scotia,20+,47081,717660,6.5603,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2001,Nova Scotia,20+,50774,724009,7.0129,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2002,Nova Scotia,20+,54438,730769,7.4494,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2003,Nova Scotia,20+,57855,738400,7.8352,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2004,Nova Scotia,20+,61674,745976,8.2676,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2005,Nova Scotia,20+,65436,752718,8.6933,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2006,Nova Scotia,20+,69623,760028,9.1606,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2007,Nova Scotia,20+,72840,764052,9.5334,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2008,Nova Scotia,20+,76549,771615,9.9206,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2009,Nova Scotia,20+,80889,779365,10.3788,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2010,Nova Scotia,20+,84898,789374,10.7551,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2011,Nova Scotia,20+,88383,797337,11.0848,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2012,Nova Scotia,20+,91073,803696,11.3318,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2013,Nova Scotia,20+,93505,810529,11.5363,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2014,Nova Scotia,20+,95885,815365,11.7598,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2015,Nova Scotia,20+,98269,821253,11.9657,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2016,Nova Scotia,20+,100488,830176,12.1044,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2017,Nova Scotia,20+,102857,840300,12.2405,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2018,Nova Scotia,20+,104986,852041,12.3217,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2019,Nova Scotia,20+,107584,867412,12.4029,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2020,Nova Scotia,20+,109382,885253,12.356,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2021,Nova Scotia,20+,111950,903906,12.3851,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
+2022,Nova Scotia,20+,115030,925725,12.4259,Nova Scotia Open Data cumi-sw99 / CCDSS,https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLOAD
