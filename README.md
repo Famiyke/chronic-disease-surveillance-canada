@@ -1,5 +1,30 @@
 # Project 2: Canadian Chronic Disease Surveillance Analysis
 
+## Primary official-source study: Nova Scotia diabetes surveillance (2000–2022)
+
+A reproducible **real-data** analysis now sits alongside this repository's older, separate synthetic national demonstration.
+
+- [Official source-based findings](OFFICIAL_NS_DIABETES_FINDINGS.md)
+- [Nova Scotia annual crude prevalence (23 years)](official_ns_diabetes_2000_2022.csv)
+- [Four-zone annual crude prevalence (92 records)](official_ns_diabetes_zone_2000_2022.csv)
+- [Download, aggregation and validation script](official_ns_diabetes.py)
+- [Passing automated source-extraction workflow](https://github.com/Famiyke/chronic-disease-surveillance-canada/actions/workflows/build-official-diabetes.yml)
+
+The observations are from Nova Scotia Open Data dataset **cumi-sw99**, described by its publisher as derived from CCDSS. Source: https://data.novascotia.ca/datasets/cumi-sw99.
+
+The 1,288 published records span four zones, both sexes and seven age bands, 2000–2022. Calculations use **case counts divided by population**, not unweighted subgroup prevalence averages.
+
+**Scope:** Nova Scotia, age 20+, crude (not age-standardized) diabetes prevalence. The 2000–2022 change is descriptive and does not establish causes.
+
+```bash
+python official_ns_diabetes.py
+```
+
+**Important:** The old `simulate_ccdss_data.py`/Power BI project remains a distinct **synthetic national demonstration**. No national CCDSS rate in that simulation is verified by the new Nova Scotia source.
+
+---
+
+
 > **PROJECT VALIDATION STATUS:** The Python demonstration workflow has passed GitHub Actions. Generated model parameters and subgroup comparisons are synthetic. No synthetic values should be described as verified official health-system statistics. See [SOURCE_VALIDATION.md](SOURCE_VALIDATION.md) for the evidence boundary.\n\n
 > **DATA PROVENANCE:** This portfolio project uses simulated records informed by named Canadian public sources. All generated statistics, rankings, demographic differences, and savings models are illustrative rather than verified official estimates. Recommendations are hypothetical scenarios, not observed effects.
 
