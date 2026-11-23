@@ -4,10 +4,11 @@ Source: Government of Nova Scotia Open Data, CCDSS-derived diabetes crude preval
 Socrata dataset ID: cumi-sw99.
 https://data.novascotia.ca/datasets/cumi-sw99
 
-This is REAL aggregated administrative surveillance data for NOVA SCOTIA only.
-Age scope is 20 years and older. Rates are crude, not age-standardized.
-It does not contain confidential records or fictional simulation parameters.
+The data cover adults aged 20 and older in Nova Scotia. The rates are crude
+prevalence estimates based on published case counts and population denominators.
 """
+
+import argparse
 import csv
 import io
 from collections import defaultdict
@@ -18,8 +19,7 @@ URL = "https://data.novascotia.ca/api/views/cumi-sw99/rows.csv?accessType=DOWNLO
 ZONE_OUT = Path("official_ns_diabetes_zone_2000_2022.csv")
 PROVINCE_OUT = Path("official_ns_diabetes_2000_2022.csv")
 REPORT = Path("OFFICIAL_NS_DIABETES_FINDINGS.md")
-AGE_BANDS = ["20 to 29", "30 to 39", "40 to 49", "50 to 59",
-             "60 to 69", "70 to 79", "80 +"]
+AGE_BANDS = ["20 to 29", "30 to 39", "40 to 49", "50 to 59", "60 to 69", "70 to 79", "80 +"]
 
 
 def write_table(path, items):
@@ -29,13 +29,17 @@ def write_table(path, items):
         writer.writerows(items)
 
 
-def main():
-    request = Request(URL, headers={"User-Agent": "Mozilla/5.0"})
-    with urlopen(request, timeout=50) as response:
-        raw = response.read()
-    records = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
-    expected_cols = {"Year", "Zone", "Sex", "Agegroup", "Population",
-                     "Prevalence", "Crude Prevalence Rate"}
+def summarize_records(records):
+    """Aggregate counts and populations before calculating crude prevalence."""
+    expected_cols = {
+        "Year",
+        "Zone",
+        "Sex",
+        "Agegroup",
+        "Population",
+        "Prevalence",
+        "Crude Prevalence Rate",
+    }
     assert records and expected_cols.issubset(records[0]), "Source schema changed"
     assert len(records) == 23 * 4 * 2 * 7, "Expected full 2000–2022 zone-sex-age cube"
     unique = set()
@@ -65,28 +69,53 @@ def main():
     assert len(zone_counts) == 23 * 4
     zone_rows = []
     for (year, zone), (count, pop) in sorted(zone_counts.items()):
-        zone_rows.append({
-            "year": year, "health_zone": zone, "age_scope": "20+",
-            "diabetes_prevalent_count": count, "population": pop,
-            "crude_diabetes_prevalence_percent": round(100 * count / pop, 4),
-            "source_dataset": "Nova Scotia Open Data cumi-sw99 / CCDSS",
-            "source_url": URL
-        })
+        zone_rows.append(
+            {
+                "year": year,
+                "health_zone": zone,
+                "age_scope": "20+",
+                "diabetes_prevalent_count": count,
+                "population": pop,
+                "crude_diabetes_prevalence_percent": round(100 * count / pop, 4),
+                "source_dataset": "Nova Scotia Open Data cumi-sw99 / CCDSS",
+                "source_url": URL,
+            }
+        )
     province_rows = []
     for year, (count, pop) in sorted(province_counts.items()):
-        province_rows.append({
-            "year": year, "geography": "Nova Scotia", "age_scope": "20+",
-            "diabetes_prevalent_count": count, "population": pop,
-            "crude_diabetes_prevalence_percent": round(100 * count / pop, 4),
-            "source_dataset": "Nova Scotia Open Data cumi-sw99 / CCDSS",
-            "source_url": URL
-        })
+        province_rows.append(
+            {
+                "year": year,
+                "geography": "Nova Scotia",
+                "age_scope": "20+",
+                "diabetes_prevalent_count": count,
+                "population": pop,
+                "crude_diabetes_prevalence_percent": round(100 * count / pop, 4),
+                "source_dataset": "Nova Scotia Open Data cumi-sw99 / CCDSS",
+                "source_url": URL,
+            }
+        )
+    return zone_rows, province_rows
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, help="Use a saved Nova Scotia source CSV")
+    args = parser.parse_args()
+    if args.source:
+        raw = args.source.read_bytes()
+    else:
+        request = Request(URL, headers={"User-Agent": "Mozilla/5.0"})
+        with urlopen(request, timeout=50) as response:
+            raw = response.read()
+    records = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
+    zone_rows, province_rows = summarize_records(records)
     write_table(ZONE_OUT, zone_rows)
     write_table(PROVINCE_OUT, province_rows)
     first, last = province_rows[0], province_rows[-1]
-    report = f"""# Real diabetes prevalence data: Nova Scotia, 2000–2022
+    report = f"""# Diabetes prevalence in Nova Scotia, 2000–2022
 
-This project uses **authentic aggregate CCDSS-derived administrative data published by the Government of Nova Scotia**. It is NOT the old synthetic national CCDSS simulation.
+The analysis uses CCDSS-derived aggregate administrative data published by the Government of Nova Scotia.
 
 **Primary source:** https://data.novascotia.ca/datasets/cumi-sw99
 
@@ -107,10 +136,10 @@ This project uses **authentic aggregate CCDSS-derived administrative data publis
 
 ## Computation and limitations
 
-Each year-zone crude prevalence is derived as the sum of published prevalent diabetes cases divided by the sum of published population denominators for the seven mutually exclusive age groups and both sexes, multiplied by 100. Provincial values aggregate all four health zones. **Do not average published subgroup percentages**: aggregation is count-weighted. All {len(records):,} source-row rates were independently checked against count/population ratios to within 0.015 percentage points, allowing for the publisher's decimal rounding.
+Each year-zone crude prevalence is derived as the sum of published prevalent diabetes cases divided by the sum of published population denominators for the seven mutually exclusive age groups and both sexes, multiplied by 100. Provincial values aggregate all four health zones. Aggregation uses the combined counts and populations, rather than an average of subgroup percentages. All {len(records):,} source-row rates were independently checked against count/population ratios to within 0.015 percentage points, allowing for the publisher's decimal rounding.
 
 - These are **crude estimates**, not age-standardized rates. Changes over time may reflect population aging, case ascertainment and diagnosis patterns as well as disease burden.
-- These are Nova Scotia-only records. **Do not treat them as national or cross-provincial findings**.
+- The findings apply to Nova Scotia and its four health zones.
 - The source has no individual patients, patient outcomes or causal variables.
 - Differences between zones do not establish differences in healthcare quality or causes of diabetes.
 - All source data remain attributed to the Government of Nova Scotia, which describes the dataset as derived from the Canadian Chronic Disease Surveillance System.
@@ -121,7 +150,7 @@ Each year-zone crude prevalence is derived as the sum of published prevalent dia
 python official_ns_diabetes.py
 ```
 
-Outputs: `official_ns_diabetes_2000_2022.csv` and `official_ns_diabetes_zone_2000_2022.csv`. The old synthetic `simulate_ccdss_data.py` workflow is retained separately as an educational example.
+Outputs: `official_ns_diabetes_2000_2022.csv` and `official_ns_diabetes_zone_2000_2022.csv`. To use a saved source CSV, run `python official_ns_diabetes.py --source path/to/ns_diabetes.csv`. The earlier synthetic `simulate_ccdss_data.py` workflow remains a separate educational example.
 """
     REPORT.write_text(report, encoding="utf-8")
     print(f"PASS: {len(records)} official source strata and {len(zone_rows)} zone-years")

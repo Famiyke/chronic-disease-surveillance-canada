@@ -1,15 +1,15 @@
 # Project 2: Canadian Chronic Disease Surveillance Analysis
 
-## Reviewed interactive dashboard (no Power BI login required)
+## Interactive diabetes dashboard
 
-[**Open the Real-data Nova Scotia diabetes visualization**](https://famiyke.github.io/health-data-portfolio/dashboards/diabetes.html)
+[**Explore Nova Scotia diabetes prevalence**](https://famiyke.github.io/health-data-portfolio/dashboards/diabetes.html)
 
-This version uses official Nova Scotia CCDSS-derived counts and populations for crude prevalence; it is not a national PHAC data analysis. The web dashboard is distinct from the older PBIX or Tableau visualization. Those legacy files were **not edited or republished** and should not be used as validated outputs.
+The dashboard calculates crude prevalence from published Nova Scotia CCDSS-derived counts and populations. The earlier PBIX and Tableau workbooks use simulated data and remain separate educational examples.
 
 
-## Primary official-source study: Nova Scotia diabetes surveillance (2000–2022)
+## Source data and analysis (2000–2022)
 
-A reproducible **real-data** analysis now sits alongside this repository's older, separate synthetic national demonstration.
+The source dataset covers adults aged 20 and older in Nova Scotia.
 
 - [Official source-based findings](OFFICIAL_NS_DIABETES_FINDINGS.md)
 - [Nova Scotia annual crude prevalence (23 years)](official_ns_diabetes_2000_2022.csv)
@@ -26,6 +26,8 @@ The 1,288 published records span four zones, both sexes and seven age bands, 200
 ```bash
 python official_ns_diabetes.py
 ```
+
+The script checks the source strata and sums cases and population denominators by year and health zone before calculating crude prevalence. To reproduce a saved source snapshot, use `python official_ns_diabetes.py --source path/to/ns_diabetes.csv`.
 
 **Important:** The old `simulate_ccdss_data.py`/Power BI project remains a distinct **synthetic national demonstration**. No national CCDSS rate in that simulation is verified by the new Nova Scotia source.
 
